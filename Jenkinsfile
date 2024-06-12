@@ -52,11 +52,9 @@ pipeline {
 
     post {
         always {
-            stage('Clean up') {
-                steps {
-                    sh "docker-compose down"
-                    cleanWs()
-                }
+            steps {
+                sh "docker-compose down"
+                cleanWs()
             }
         }
     }
