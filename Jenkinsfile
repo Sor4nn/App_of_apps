@@ -61,17 +61,19 @@ pipeline
             }
         }
 
-        stage('Clean up') 
+    post 
         {
-            post 
+            always 
             {
-                always 
+                stage('Clean up') 
                 {
-                    sh "docker-compose down"
-                    cleanWs()
+                    steps 
+                    {
+                        sh "docker-compose down"
+                        cleanWs()
+                    }
                 }
             }
         }
-    
     }
 }
