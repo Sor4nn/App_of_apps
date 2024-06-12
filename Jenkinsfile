@@ -10,6 +10,9 @@ pipeline {
         string(name: 'backendDockerTag', defaultValue: 'latest', description: '')
         string(name: 'frontendDockerTag', defaultValue: 'latest', description: '')
     }
+    environment {
+        PIP_BREAK_SYSTEM_PACKAGES = '1'
+    }
 
     stages {
         stage('Get Code') {
@@ -36,7 +39,8 @@ pipeline {
             }
         }
 
-        stage('Deploy application') {
+        stage('Deploy application') 
+        {
             steps {
                 script {
                     withEnv([
@@ -48,18 +52,19 @@ pipeline {
                 }
             }
         }
+
+        stage('PytonTest ') {
+            steps {
+                script {
+                    sh "pip3 install -r requirements.txt"
+                    sh "python3 -m pytest test/frontendTest.py"
+                }
+            }
+        }
+        
     }
 
-         stage('Run Selenium Tests') {
-                    steps {
-                        script {
-                            withEnv(["PIP_BREAK_SYSTEM_PACKAGES=1"]) {
-                                sh "pip3 install -r requirements.txt"
-                                sh "python3 -m pytest test/frontendTest.py"
-                            }
-                        }
-                    }
-                }
+
 
     post {
         always {
