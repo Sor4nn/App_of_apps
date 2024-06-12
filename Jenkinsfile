@@ -1,3 +1,6 @@
+def frontendImage = "sor4nn/frontend:${params.frontendDockerTag}"
+def backendImage = "sor4nn/backend:${params.backendDockerTag}"
+
 pipeline 
 {
     agent 
@@ -21,14 +24,12 @@ pipeline
             }
         }
         
-        stage('Set Variables') 
+        stage('Version Info') 
         {
             steps 
             {
                 script 
                 {
-                    def frontendImage = "sor4nn/frontend:${params.frontendDockerTag}"
-                    def backendImage = "sor4nn/backend:${params.backendDockerTag}"
                     currentBuild.description = "Backend Version: ${params.backendDockerTag}, Frontend Version: ${params.frontendDockerTag}"
                 }
             }
