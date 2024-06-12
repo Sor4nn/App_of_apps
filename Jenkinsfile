@@ -50,6 +50,17 @@ pipeline {
         }
     }
 
+         stage('Run Selenium Tests') {
+                    steps {
+                        script {
+                            withEnv(["PIP_BREAK_SYSTEM_PACKAGES=1"]) {
+                                sh "pip3 install -r requirements.txt"
+                                sh "python3 -m pytest test/frontendTest.py"
+                            }
+                        }
+                    }
+                }
+
     post {
         always {
             steps {
