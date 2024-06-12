@@ -59,6 +59,15 @@ pipeline
                     }
                 }
             }
+            steps ('Cleanup')
+            {
+                script 
+                {
+                    sh "docker-compose down
+                    sh "cleanWs()"
+                }
+            }
+        }
         }
     }
 }
