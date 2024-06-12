@@ -21,5 +21,12 @@ currentBuild.description = "Backend Version: ${params.backendDockerTag}, Fronten
                 checkout scm
             }
         }
+        stage('Build Output') 
+        {
+            steps 
+            {
+                sh "echo currentBuild.description"
+            }
+        }
     }
 }
