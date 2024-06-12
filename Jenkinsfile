@@ -1,14 +1,18 @@
-pipeline
-{agent 
+pipeline 
+{
+    agent 
     {
-      label 'agent'
+        label 'agent'
     }
 
-stage('Get Code') 
+    stages 
     {
-      steps 
-      {
-        checkout scm
-      }
+        stage('Get Code') 
+        {
+            steps 
+            {
+                checkout scm
+            }
+        }
     }
 }
