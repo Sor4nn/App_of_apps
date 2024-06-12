@@ -34,5 +34,16 @@ pipeline
                 }
             }
         }
+        stage('Remove Images') 
+        {
+            steps 
+            {
+                script 
+                {
+                    sh "docker rm -f frontend || true"
+                    sh "docker rm -f backend || true"
+                }
+            }
+        }
     }
 }
