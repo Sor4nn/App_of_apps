@@ -4,15 +4,13 @@ pipeline
     {
         label 'agent'
     }
-def frontendImage="sor4nn/frontend:${params.frontendDockerTag}"
-def backendImage="sor4nn/backend:${params.frontendDockerTag}"
+    
     parameters 
     {
-        string(name: 'backendDockerTag', defaultValue: 'latest')
-        string(name: 'frontendDockerTag', defaultValue: 'latest')
+        string(name: 'backendDockerTag', defaultValue: 'latest', description: '')
+        string(name: 'frontendDockerTag', defaultValue: 'latest', description: '')
     }
-
-currentBuild.description = "Backend Version: ${params.backendDockerTag}, Frontend Version: ${params.frontendDockerTag}"
+    
     stages 
     {
         stage('Get Code') 
@@ -22,11 +20,17 @@ currentBuild.description = "Backend Version: ${params.backendDockerTag}, Fronten
                 checkout scm
             }
         }
-        stage('Build Output') 
+        
+        stage('Set Variables') 
         {
             steps 
             {
-                sh "echo currentBuild.description"
+                script 
+                {
+                    def frontendImage = "sor4nn/frontend:${params.frontendDockerTag}"
+                    def backendImage = "sor4nn/backend:${params.backendDockerTag}"
+                    currentBuild.description = "Backend Version: ${params.backendDockerTag}, Frontend Version: ${params.frontendDockerTag}"
+                }
             }
         }
     }
