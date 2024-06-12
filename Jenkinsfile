@@ -42,6 +42,7 @@ pipeline
                 {
                     sh "docker rm -f frontend || true"
                     sh "docker rm -f backend || true"
+                    echo "Removed Frontend & Backend Containers"
                 }
             }
         }
