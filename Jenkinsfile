@@ -1,7 +1,5 @@
-def frontendImage = "sor4nn/frontend:${params.frontendDockerTag}"
-def backendImage = "sor4nn/backend:${params.backendDockerTag}"
-def dockerRegistry="https://hub.docker.com/repositories/sor4nn"
-def registryCredentials="dockerhub"
+def frontendImage = "sor4nn/frontend"
+def backendImage = "sor4nn/backend"
 pipeline 
 {
     agent 
