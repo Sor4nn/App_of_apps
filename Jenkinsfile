@@ -60,5 +60,18 @@ pipeline
                 }
             }
         }
+
+        stage('Remove Images') 
+        {
+            post 
+            {
+                always 
+                {
+                    sh "docker-compose down"
+                    cleanWs()
+                }
+            }
+        }
+    
     }
 }
