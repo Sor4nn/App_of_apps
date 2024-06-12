@@ -61,7 +61,7 @@ pipeline
             }
         }
 
-        stage('Remove Images') 
+        stage('Clean up') 
         {
             post 
             {
