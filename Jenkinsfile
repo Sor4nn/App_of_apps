@@ -56,7 +56,7 @@ pipeline {
         stage('PytonTest ') {
             steps {
                 script {
-                    sh "pip3 install -r requirements.txt"
+                    sh "pip3 install -r requirements.yaml"
                     sh "python3 -m pytest test/frontendTest.py"
                 }
             }
