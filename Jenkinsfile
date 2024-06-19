@@ -5,7 +5,9 @@ pipeline {
     agent {
         label 'agent'
     }
-
+    tools {
+        terraform 'terraform'
+    }
     parameters {
         string(name: 'backendDockerTag', defaultValue: 'latest', description: '')
         string(name: 'frontendDockerTag', defaultValue: 'latest', description: '')
