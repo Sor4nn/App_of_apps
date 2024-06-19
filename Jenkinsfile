@@ -5,7 +5,18 @@ pipeline {
     agent {
         label 'agent'
     }
-
+        stage('Run terraform') {
+            steps {
+                dir('Terraform') {                
+                    git branch: 'main', url: 'https://github.com/sor4nn/Terraform'
+                    withAWS(credentials:'AWS', region: 'us-east-1') {
+                            sh 'terraform init -backend-config=bucket=dariusz-zarembski-panda-devops-core-18'
+                            sh 'terraform apply -auto-approve -var bucket_name=dariusz-zarembski-panda-devops-core-18'
+                            
+                    } 
+                }
+            }
+        }
     parameters {
         string(name: 'backendDockerTag', defaultValue: 'latest', description: '')
         string(name: 'frontendDockerTag', defaultValue: 'latest', description: '')
